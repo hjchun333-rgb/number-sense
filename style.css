@@ -42,22 +42,29 @@ body {
     width: 100%;
     height: 100%;
     pointer-events: none;
-    background: 
+    background:
         radial-gradient(2px 2px at 20px 30px, #fff, transparent),
-        radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.8), transparent),
+        radial-gradient(2px 2px at 40px 70px, rgba(255, 255, 255, 0.8), transparent),
         radial-gradient(1px 1px at 90px 40px, #fff, transparent),
-        radial-gradient(2px 2px at 130px 80px, rgba(255,255,255,0.6), transparent),
+        radial-gradient(2px 2px at 130px 80px, rgba(255, 255, 255, 0.6), transparent),
         radial-gradient(1px 1px at 160px 120px, #fff, transparent),
-        radial-gradient(2px 2px at 200px 50px, rgba(255,255,255,0.7), transparent),
+        radial-gradient(2px 2px at 200px 50px, rgba(255, 255, 255, 0.7), transparent),
         radial-gradient(1px 1px at 250px 160px, #fff, transparent),
-        radial-gradient(2px 2px at 300px 100px, rgba(255,255,255,0.5), transparent);
+        radial-gradient(2px 2px at 300px 100px, rgba(255, 255, 255, 0.5), transparent);
     background-size: 350px 200px;
     animation: twinkle 5s ease-in-out infinite;
 }
 
 @keyframes twinkle {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.5; }
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
 }
 
 .shooting-stars {
@@ -94,10 +101,23 @@ body {
 }
 
 @keyframes shoot {
-    0% { transform: translateX(0) translateY(0); opacity: 0; }
-    10% { opacity: 1; }
-    70% { opacity: 1; }
-    100% { transform: translateX(calc(100vw + 200px)) translateY(100px); opacity: 0; }
+    0% {
+        transform: translateX(0) translateY(0);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    70% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateX(calc(100vw + 200px)) translateY(100px);
+        opacity: 0;
+    }
 }
 
 /* === 컨테이너 === */
@@ -125,8 +145,15 @@ body {
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* === 시작 화면 === */
@@ -141,8 +168,15 @@ body {
 }
 
 @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-15px); }
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
 }
 
 .logo-text {
@@ -199,7 +233,7 @@ body {
     padding: 20px 0;
 }
 
-.character-select > p {
+.character-select>p {
     color: var(--text-muted);
     margin-bottom: 15px;
 }
@@ -382,6 +416,51 @@ body {
     color: var(--text-muted);
 }
 
+/* === 퍼즐 입력 필드 === */
+.puzzle-input {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.puzzle-input input {
+    width: 120px;
+    padding: 14px 16px;
+    font-size: 1.3rem;
+    font-weight: 700;
+    text-align: center;
+    border: 2px solid var(--bg-glass);
+    border-radius: 16px;
+    background: var(--bg-card);
+    color: var(--text);
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.puzzle-input input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 20px rgba(108, 99, 255, 0.3);
+}
+
+.puzzle-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 15px 0;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.puzzle-divider::before,
+.puzzle-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--bg-glass);
+    margin: 0 15px;
+}
+
 .options {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -419,14 +498,31 @@ body {
 }
 
 @keyframes pulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.1); }
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
 }
 
 @keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-10px); }
-    75% { transform: translateX(10px); }
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-10px);
+    }
+
+    75% {
+        transform: translateX(10px);
+    }
 }
 
 /* === 게임 통계 === */
@@ -558,8 +654,15 @@ body {
 }
 
 @keyframes bounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
 }
 
 .result-container h2 {
@@ -604,7 +707,8 @@ body {
 }
 
 /* === 그래프 === */
-.result-graph, .history-graph {
+.result-graph,
+.history-graph {
     background: var(--bg-card);
     border-radius: 20px;
     padding: 20px;
@@ -612,7 +716,8 @@ body {
     border: 1px solid var(--bg-glass);
 }
 
-.result-graph h3, .history-graph h3 {
+.result-graph h3,
+.history-graph h3 {
     font-size: 1rem;
     color: var(--text-muted);
     margin-bottom: 15px;
@@ -675,8 +780,15 @@ body {
 }
 
 @keyframes glow {
-    0%, 100% { box-shadow: 0 0 20px rgba(251, 191, 36, 0.3); }
-    50% { box-shadow: 0 0 40px rgba(251, 191, 36, 0.5); }
+
+    0%,
+    100% {
+        box-shadow: 0 0 20px rgba(251, 191, 36, 0.3);
+    }
+
+    50% {
+        box-shadow: 0 0 40px rgba(251, 191, 36, 0.5);
+    }
 }
 
 .reward-badge {
@@ -755,16 +867,17 @@ body {
     .logo-text {
         font-size: 2rem;
     }
-    
-    .puzzle-question, .question {
+
+    .puzzle-question,
+    .question {
         font-size: 2rem;
     }
-    
+
     .result-stats {
         flex-direction: column;
         align-items: center;
     }
-    
+
     .result-stat {
         width: 100%;
         max-width: 200px;

@@ -88,9 +88,12 @@ function startGame() {
 }
 
 // === Stage 1: 10의 보수 퍼즐 ===
+let currentPuzzleTarget = null;
+
 function showPuzzle() {
     const num = GameState.stage1Numbers[GameState.stage1Progress];
     const target = 10 - num;
+    currentPuzzleTarget = target;
 
     // 옵션 생성 (정답 + 오답 3개)
     let options = [target];
@@ -104,6 +107,13 @@ function showPuzzle() {
 
     // UI 업데이트
     document.getElementById('puzzle-num').textContent = num;
+
+    // 입력 필드 초기화
+    const puzzleInput = document.getElementById('puzzle-answer-input');
+    if (puzzleInput) {
+        puzzleInput.value = '';
+        puzzleInput.focus();
+    }
 
     const optionsContainer = document.getElementById('puzzle-options');
     optionsContainer.innerHTML = options.map(opt =>
