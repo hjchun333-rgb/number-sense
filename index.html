@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚀 안티그래비티 연산 | Number Sense</title>
+    <meta name="description" content="재미있게 수학 연산 실력을 키우는 안티그래비티 연산 게임">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="stars"></div>
+    <div class="shooting-stars"></div>
+    
+    <div class="container">
+        <!-- 시작 화면 -->
+        <div id="screen-start" class="screen active">
+            <div class="logo-container">
+                <div class="logo-icon">🚀</div>
+                <h1 class="logo-text">안티그래비티</h1>
+                <p class="logo-subtitle">연산의 힘으로 중력을 탈출하라!</p>
+            </div>
+            
+            <div class="input-group">
+                <label for="player-name">이름을 입력해 주세요</label>
+                <input type="text" id="player-name" placeholder="우주비행사 이름" maxlength="10">
+            </div>
+            
+            <div class="character-select">
+                <p>함께할 캐릭터를 골라주세요!</p>
+                <div class="characters">
+                    <button class="char-btn selected" data-char="🚀" data-name="용감한 우주비행사">🚀</button>
+                    <button class="char-btn" data-char="🤖" data-name="똑똑한 로봇">🤖</button>
+                    <button class="char-btn" data-char="👽" data-name="신비한 외계인">👽</button>
+                </div>
+                <p class="char-name">용감한 우주비행사</p>
+            </div>
+            
+            <button id="btn-start" class="btn btn-primary">
+                <span>게임 시작</span>
+                <span class="btn-icon">▶</span>
+            </button>
+            
+            <button id="btn-history" class="btn btn-secondary">
+                <span>📊 나의 기록 보기</span>
+            </button>
+        </div>
+
+        <!-- 스테이지 1: 10의 보수 -->
+        <div id="screen-stage1" class="screen">
+            <div class="stage-header">
+                <div class="stage-badge">STAGE 1</div>
+                <h2>🔋 에너지 코어 충전</h2>
+                <p>10의 보수 퍼즐을 맞춰 에너지를 모으세요!</p>
+            </div>
+            
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress1"></div>
+                </div>
+                <span class="progress-text" id="progress1-text">0 / 9</span>
+            </div>
+            
+            <div class="puzzle-container">
+                <div class="puzzle-question">
+                    <span class="puzzle-num" id="puzzle-num">5</span>
+                    <span class="puzzle-op">+</span>
+                    <span class="puzzle-blank">?</span>
+                    <span class="puzzle-eq">=</span>
+                    <span class="puzzle-result">10</span>
+                </div>
+                
+                <div class="options" id="puzzle-options">
+                    <!-- 옵션 버튼들 -->
+                </div>
+            </div>
+            
+            <div class="feedback" id="feedback1"></div>
+        </div>
+
+        <!-- 스테이지 2: 연산 게임 -->
+        <div id="screen-stage2" class="screen">
+            <div class="stage-header">
+                <div class="stage-badge stage2">STAGE 2</div>
+                <h2>🚀 중력 탈출!</h2>
+                <p>20문제를 해결하고 우주로 날아오르세요!</p>
+            </div>
+            
+            <div class="game-stats">
+                <div class="stat">
+                    <span class="stat-icon">⏱️</span>
+                    <span class="stat-value" id="timer">0:00</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-icon">⭐</span>
+                    <span class="stat-value" id="score">0</span>
+                </div>
+            </div>
+            
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill stage2" id="progress2"></div>
+                </div>
+                <span class="progress-text" id="progress2-text">0 / 20</span>
+            </div>
+            
+            <div class="question-container">
+                <div class="question-number">문제 <span id="q-number">1</span></div>
+                <div class="question" id="question">12 + 5 = ?</div>
+                
+                <div class="answer-input">
+                    <input type="number" id="answer-input" placeholder="정답 입력" inputmode="numeric">
+                    <button id="btn-submit" class="btn btn-submit">확인</button>
+                </div>
+                
+                <div class="chances" id="chances">
+                    <span class="chance active">❤️</span>
+                    <span class="chance active">❤️</span>
+                </div>
+            </div>
+            
+            <div class="feedback" id="feedback2"></div>
+        </div>
+
+        <!-- 결과 화면 -->
+        <div id="screen-result" class="screen">
+            <div class="result-container">
+                <div class="result-crown">👑</div>
+                <h2>오늘의 연산왕 리포트</h2>
+                <p class="result-name" id="result-name">우주비행사님</p>
+                
+                <div class="result-stats">
+                    <div class="result-stat">
+                        <div class="result-stat-value" id="result-score">18</div>
+                        <div class="result-stat-label">맞힌 문제</div>
+                    </div>
+                    <div class="result-stat">
+                        <div class="result-stat-value" id="result-time">1:23</div>
+                        <div class="result-stat-label">걸린 시간</div>
+                    </div>
+                    <div class="result-stat">
+                        <div class="result-stat-value" id="result-accuracy">90%</div>
+                        <div class="result-stat-label">정확도</div>
+                    </div>
+                </div>
+                
+                <div class="result-graph">
+                    <h3>📈 최근 7회 성장 그래프</h3>
+                    <div class="graph" id="graph"></div>
+                </div>
+                
+                <div class="reward-container" id="reward-container" style="display: none;">
+                    <div class="reward-badge">🎁 보상 획득!</div>
+                    <p class="reward-title">🏅 획득 칭호: <span class="reward-highlight">[수학 천재]</span></p>
+                    <p class="reward-fortune" id="reward-fortune"></p>
+                </div>
+                
+                <div class="daily-count" id="daily-count">오늘 1회 도전 (최대 5회)</div>
+                
+                <button id="btn-retry" class="btn btn-primary">
+                    <span>다시 도전하기</span>
+                    <span class="btn-icon">🔄</span>
+                </button>
+                
+                <button id="btn-home" class="btn btn-secondary">
+                    <span>🏠 처음으로</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- 기록 화면 -->
+        <div id="screen-history" class="screen">
+            <div class="history-container">
+                <h2>📊 나의 기록</h2>
+                <div class="history-graph">
+                    <h3>최근 7회 성장 그래프</h3>
+                    <div class="graph" id="history-graph"></div>
+                </div>
+                <div class="history-list" id="history-list">
+                    <!-- 기록 리스트 -->
+                </div>
+                <button id="btn-back" class="btn btn-secondary">
+                    <span>← 돌아가기</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>

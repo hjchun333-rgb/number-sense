@@ -1,0 +1,772 @@
+/* === CSS 변수 및 테마 === */
+:root {
+    --primary: #6C63FF;
+    --primary-dark: #5A52E0;
+    --secondary: #FF6B9D;
+    --accent: #00D9FF;
+    --success: #4ADE80;
+    --warning: #FBBF24;
+    --danger: #F87171;
+    --bg-dark: #0F0F23;
+    --bg-card: rgba(255, 255, 255, 0.05);
+    --bg-glass: rgba(255, 255, 255, 0.1);
+    --text: #FFFFFF;
+    --text-muted: rgba(255, 255, 255, 0.6);
+    --gradient-1: linear-gradient(135deg, #6C63FF 0%, #FF6B9D 100%);
+    --gradient-2: linear-gradient(135deg, #00D9FF 0%, #6C63FF 100%);
+    --shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    --shadow-glow: 0 0 40px rgba(108, 99, 255, 0.4);
+}
+
+/* === 리셋 및 기본 스타일 === */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: var(--bg-dark);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* === 배경 별 효과 === */
+.stars {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background: 
+        radial-gradient(2px 2px at 20px 30px, #fff, transparent),
+        radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1px 1px at 90px 40px, #fff, transparent),
+        radial-gradient(2px 2px at 130px 80px, rgba(255,255,255,0.6), transparent),
+        radial-gradient(1px 1px at 160px 120px, #fff, transparent),
+        radial-gradient(2px 2px at 200px 50px, rgba(255,255,255,0.7), transparent),
+        radial-gradient(1px 1px at 250px 160px, #fff, transparent),
+        radial-gradient(2px 2px at 300px 100px, rgba(255,255,255,0.5), transparent);
+    background-size: 350px 200px;
+    animation: twinkle 5s ease-in-out infinite;
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+.shooting-stars {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.shooting-stars::before,
+.shooting-stars::after {
+    content: '';
+    position: absolute;
+    width: 100px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), transparent);
+    animation: shoot 4s ease-in-out infinite;
+    opacity: 0;
+}
+
+.shooting-stars::before {
+    top: 20%;
+    left: -100px;
+    animation-delay: 0s;
+}
+
+.shooting-stars::after {
+    top: 60%;
+    left: -100px;
+    animation-delay: 2s;
+}
+
+@keyframes shoot {
+    0% { transform: translateX(0) translateY(0); opacity: 0; }
+    10% { opacity: 1; }
+    70% { opacity: 1; }
+    100% { transform: translateX(calc(100vw + 200px)) translateY(100px); opacity: 0; }
+}
+
+/* === 컨테이너 === */
+.container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 1;
+}
+
+/* === 화면 전환 === */
+.screen {
+    display: none;
+    flex-direction: column;
+    flex: 1;
+    animation: fadeIn 0.5s ease;
+}
+
+.screen.active {
+    display: flex;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* === 시작 화면 === */
+.logo-container {
+    text-align: center;
+    padding: 40px 0;
+}
+
+.logo-icon {
+    font-size: 80px;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+.logo-text {
+    font-size: 2.5rem;
+    font-weight: 900;
+    background: var(--gradient-1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 10px 0;
+}
+
+.logo-subtitle {
+    color: var(--text-muted);
+    font-size: 1rem;
+}
+
+/* === 입력 그룹 === */
+.input-group {
+    margin: 20px 0;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--text-muted);
+}
+
+.input-group input {
+    width: 100%;
+    padding: 16px 20px;
+    font-size: 1.1rem;
+    border: 2px solid var(--bg-glass);
+    border-radius: 16px;
+    background: var(--bg-card);
+    color: var(--text);
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.input-group input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 20px rgba(108, 99, 255, 0.3);
+}
+
+.input-group input::placeholder {
+    color: var(--text-muted);
+}
+
+/* === 캐릭터 선택 === */
+.character-select {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.character-select > p {
+    color: var(--text-muted);
+    margin-bottom: 15px;
+}
+
+.characters {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 10px;
+}
+
+.char-btn {
+    width: 80px;
+    height: 80px;
+    font-size: 40px;
+    border: 3px solid var(--bg-glass);
+    border-radius: 20px;
+    background: var(--bg-card);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.char-btn:hover {
+    transform: scale(1.1);
+    border-color: var(--primary);
+}
+
+.char-btn.selected {
+    border-color: var(--primary);
+    background: rgba(108, 99, 255, 0.2);
+    box-shadow: var(--shadow-glow);
+}
+
+.char-name {
+    color: var(--accent);
+    font-weight: 500;
+    min-height: 24px;
+}
+
+/* === 버튼 === */
+.btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 18px 24px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 8px 0;
+}
+
+.btn-primary {
+    background: var(--gradient-1);
+    color: white;
+    box-shadow: 0 10px 30px rgba(108, 99, 255, 0.4);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 40px rgba(108, 99, 255, 0.5);
+}
+
+.btn-secondary {
+    background: var(--bg-card);
+    color: var(--text);
+    border: 2px solid var(--bg-glass);
+}
+
+.btn-secondary:hover {
+    background: var(--bg-glass);
+    border-color: var(--primary);
+}
+
+.btn-submit {
+    width: auto;
+    padding: 16px 32px;
+    background: var(--gradient-2);
+}
+
+/* === 스테이지 헤더 === */
+.stage-header {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.stage-badge {
+    display: inline-block;
+    padding: 8px 20px;
+    background: var(--gradient-1);
+    border-radius: 30px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.stage-badge.stage2 {
+    background: var(--gradient-2);
+}
+
+.stage-header h2 {
+    font-size: 1.8rem;
+    margin-bottom: 8px;
+}
+
+.stage-header p {
+    color: var(--text-muted);
+}
+
+/* === 진행 바 === */
+.progress-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.progress-bar {
+    flex: 1;
+    height: 12px;
+    background: var(--bg-card);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: var(--gradient-1);
+    border-radius: 10px;
+    transition: width 0.5s ease;
+    width: 0%;
+}
+
+.progress-fill.stage2 {
+    background: var(--gradient-2);
+}
+
+.progress-text {
+    font-weight: 700;
+    color: var(--accent);
+    min-width: 60px;
+}
+
+/* === 퍼즐 컨테이너 === */
+.puzzle-container {
+    background: var(--bg-card);
+    border-radius: 24px;
+    padding: 30px;
+    margin: 20px 0;
+    border: 1px solid var(--bg-glass);
+}
+
+.puzzle-question {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+
+.puzzle-num {
+    color: var(--accent);
+}
+
+.puzzle-blank {
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-glass);
+    border-radius: 16px;
+    border: 3px dashed var(--primary);
+    color: var(--text-muted);
+}
+
+.options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.option-btn {
+    padding: 20px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    background: var(--bg-glass);
+    border: 2px solid transparent;
+    border-radius: 16px;
+    color: var(--text);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.option-btn:hover {
+    background: rgba(108, 99, 255, 0.2);
+    border-color: var(--primary);
+    transform: scale(1.05);
+}
+
+.option-btn.correct {
+    background: rgba(74, 222, 128, 0.3);
+    border-color: var(--success);
+    animation: pulse 0.5s ease;
+}
+
+.option-btn.wrong {
+    background: rgba(248, 113, 113, 0.3);
+    border-color: var(--danger);
+    animation: shake 0.5s ease;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    75% { transform: translateX(10px); }
+}
+
+/* === 게임 통계 === */
+.game-stats {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin: 10px 0;
+}
+
+.stat {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+.stat-icon {
+    font-size: 1.5rem;
+}
+
+/* === 문제 컨테이너 === */
+.question-container {
+    background: var(--bg-card);
+    border-radius: 24px;
+    padding: 30px;
+    margin: 20px 0;
+    border: 1px solid var(--bg-glass);
+    text-align: center;
+}
+
+.question-number {
+    color: var(--text-muted);
+    font-size: 1rem;
+    margin-bottom: 15px;
+}
+
+.question {
+    font-size: 2.5rem;
+    font-weight: 900;
+    background: var(--gradient-2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 25px;
+}
+
+.answer-input {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.answer-input input {
+    width: 150px;
+    padding: 16px 20px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-align: center;
+    border: 2px solid var(--bg-glass);
+    border-radius: 16px;
+    background: var(--bg-card);
+    color: var(--text);
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.answer-input input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 20px rgba(0, 217, 255, 0.3);
+}
+
+.chances {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.chance {
+    font-size: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.chance.lost {
+    filter: grayscale(1);
+    opacity: 0.3;
+}
+
+/* === 피드백 === */
+.feedback {
+    text-align: center;
+    padding: 15px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.feedback.success {
+    background: rgba(74, 222, 128, 0.2);
+    color: var(--success);
+}
+
+.feedback.error {
+    background: rgba(248, 113, 113, 0.2);
+    color: var(--danger);
+}
+
+.feedback.warning {
+    background: rgba(251, 191, 36, 0.2);
+    color: var(--warning);
+}
+
+/* === 결과 화면 === */
+.result-container {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.result-crown {
+    font-size: 60px;
+    animation: bounce 1s ease infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.result-container h2 {
+    font-size: 1.8rem;
+    margin: 10px 0;
+}
+
+.result-name {
+    color: var(--accent);
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+.result-stats {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 30px 0;
+}
+
+.result-stat {
+    background: var(--bg-card);
+    padding: 20px 25px;
+    border-radius: 20px;
+    border: 1px solid var(--bg-glass);
+    min-width: 100px;
+}
+
+.result-stat-value {
+    font-size: 2rem;
+    font-weight: 900;
+    background: var(--gradient-1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.result-stat-label {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin-top: 5px;
+}
+
+/* === 그래프 === */
+.result-graph, .history-graph {
+    background: var(--bg-card);
+    border-radius: 20px;
+    padding: 20px;
+    margin: 20px 0;
+    border: 1px solid var(--bg-glass);
+}
+
+.result-graph h3, .history-graph h3 {
+    font-size: 1rem;
+    color: var(--text-muted);
+    margin-bottom: 15px;
+}
+
+.graph {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.graph-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.graph-date {
+    width: 50px;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.graph-bar-container {
+    flex: 1;
+    height: 24px;
+    background: var(--bg-glass);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.graph-bar {
+    height: 100%;
+    background: var(--gradient-1);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 10px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    transition: width 1s ease;
+}
+
+.graph-time {
+    width: 50px;
+    text-align: right;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+/* === 보상 === */
+.reward-container {
+    background: linear-gradient(135deg, rgba(251, 191, 36, 0.2) 0%, rgba(255, 107, 157, 0.2) 100%);
+    border: 2px solid var(--warning);
+    border-radius: 20px;
+    padding: 20px;
+    margin: 20px 0;
+    animation: glow 2s ease-in-out infinite;
+}
+
+@keyframes glow {
+    0%, 100% { box-shadow: 0 0 20px rgba(251, 191, 36, 0.3); }
+    50% { box-shadow: 0 0 40px rgba(251, 191, 36, 0.5); }
+}
+
+.reward-badge {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.reward-title {
+    margin-bottom: 10px;
+}
+
+.reward-highlight {
+    color: var(--success);
+    font-weight: 700;
+}
+
+.reward-fortune {
+    color: var(--warning);
+    font-style: italic;
+}
+
+.daily-count {
+    color: var(--text-muted);
+    margin: 20px 0;
+}
+
+/* === 기록 화면 === */
+.history-container {
+    padding: 20px 0;
+}
+
+.history-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.history-list {
+    background: var(--bg-card);
+    border-radius: 20px;
+    padding: 20px;
+    margin: 20px 0;
+    border: 1px solid var(--bg-glass);
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.history-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--bg-glass);
+}
+
+.history-item:last-child {
+    border-bottom: none;
+}
+
+.history-date {
+    color: var(--text-muted);
+}
+
+.history-score {
+    color: var(--accent);
+    font-weight: 700;
+}
+
+.history-time {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+/* === 반응형 === */
+@media (max-width: 400px) {
+    .logo-text {
+        font-size: 2rem;
+    }
+    
+    .puzzle-question, .question {
+        font-size: 2rem;
+    }
+    
+    .result-stats {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .result-stat {
+        width: 100%;
+        max-width: 200px;
+    }
+}
